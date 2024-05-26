@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        function addName(callback){
+            console.log('최민준');
+            
+            callback();
+        };
+
+        setTimeout(function() {
+            console.log('hello');
+        }, 1000);
+
+        addName(setTimeout);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
