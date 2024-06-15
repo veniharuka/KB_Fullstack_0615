@@ -1,0 +1,66 @@
+<script setup>
+import HelloWorld from './components/HelloWorld.vue'
+import TheWelcome from './components/TheWelcome.vue'
+</script>
+
+<template>
+  <header>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+
+    
+<div>
+<h2>취미생황</h2>
+<label> 
+<input type="checkbox" value="A" v-model="hobby"> 운동
+</label>
+<label> 
+<input type="checkbox" value="B" v-model="hobby"> 독서
+</label>
+<label> 
+<input type="checkbox" value="C" v-model="hobby"> 음악
+</label>
+<label> 
+<input type="checkbox" value="D" v-model="hobby"> 댄스
+</label>
+<label> 
+<input type="checkbox" value="E" v-model="hobby"> 역사
+</label> </div>
+<br>
+    <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+    </div>
+  </header>
+
+  <main>
+    <TheWelcome />
+  </main>
+</template>
+
+<style scoped>
+header {
+  line-height: 1.5;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
+</style>
