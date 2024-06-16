@@ -1,66 +1,40 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    
-<div>
-<h2>취미생황</h2>
-<label> 
-<input type="checkbox" value="A" v-model="hobby"> 운동
-</label>
-<label> 
-<input type="checkbox" value="B" v-model="hobby"> 독서
-</label>
-<label> 
-<input type="checkbox" value="C" v-model="hobby"> 음악
-</label>
-<label> 
-<input type="checkbox" value="D" v-model="hobby"> 댄스
-</label>
-<label> 
-<input type="checkbox" value="E" v-model="hobby"> 역사
-</label> </div>
-<br>
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div id="app" class="container">
+    <div class="card card-body bg-light">
+      <div class="title">:: Todolist App</div>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <div class="card card-default card-borderless">
+      <div class="card-body">
+        <InputTodo @add-todo="addTodo" />
+        <TodoList :todoList="state.todoList" @delete-todo="deleteTodo" @toggle-completed="toggleCompleted" />
+      </div>
+    </div>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<script setup>
+import { reactive, onMounted } from 'vue';
+import InputTodo from './components/InputTodo.vue';
+import TodoList from './components/TodoList.vue';
+const ts = new Date().getTime();
+const state = reactive({ todoList: [] });
+onMounted(() => {
+state.todoList.push({ id: ts, todo: '자전거    타기', completed: false }); state.todoList.push({ id: ts + 1, todo: '딸과    공원    산책', completed: true }); state.todoList.push({ id: ts + 2, todo: '일요일    애견    카페', completed: false }); state.todoList.push({ id: ts + 3, todo: 'Vue 원고    집필', completed: false });
+});
+
+const addTodo = (todo) => {
+if (todo.length >= 2) {
+state.todoList.push({
+id: new Date().getTime(),
+todo: todo,
+completed: false,
+});
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+};
+const deleteTodo = (id) => {
+let index = state.todoList.findIndex((item) => id === item.id); state.todoList.splice(index, 1);
+};
+const toggleCompleted = (id) => {
+let index = state.todoList.findIndex((item) => id === item.id); state.todoList[index].completed = !state.todoList[index].completed;
+};
+</script>
